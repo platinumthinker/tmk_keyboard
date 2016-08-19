@@ -36,48 +36,43 @@
  * power:   PD4(L:off/H:on)
  * row-ext: PC6,7 for HHKB JP(active low)
  */
-static inline void KEY_ENABLE(void) { (PORTB &= ~(1<<6)); }
-static inline void KEY_UNABLE(void) { (PORTB |=  (1<<6)); }
-static inline bool KEY_STATE(void) { return (PINF & (1<<0)); }
-static inline void KEY_PREV_ON(void) { (PORTF |=  (1<<1)); }
-static inline void KEY_PREV_OFF(void) { (PORTF &= ~(1<<1)); }
-#ifdef HHKB_POWER_SAVING
-static inline void KEY_POWER_ON(void) {
-    DDRB = 0xFF; PORTB = 0x40;          // change pins output
-    DDRD |= (1<<4); PORTD |= (1<<4);    // MOS FET switch on
-    /* Without this wait you will miss or get false key events. */
-    _delay_ms(5);                       // wait for powering up
-}
-static inline void KEY_POWER_OFF(void) {
-    /* input with pull-up consumes less than without it when pin is open. */
-    DDRB = 0x00; PORTB = 0xFF;          // change pins input with pull-up
-    DDRD |= (1<<4); PORTD &= ~(1<<4);   // MOS FET switch off
-}
-static inline bool KEY_POWER_STATE(void) { return PORTD & (1<<4); }
-#else
+static inline void KEY_ENABLE(void) { (PORTD &= ~(1<<6)); }
+static inline void KEY_UNABLE(void) { (PORTD |=  (1<<6)); }
+static inline bool KEY_STATE(void) { return (PINB & (1<<0)); }
+static inline void KEY_PREV_ON(void) { (PORTF |=  (1<<4)); }
+static inline void KEY_PREV_OFF(void) { (PORTF &= ~(1<<4)); }
+/* #ifdef HHKB_POWER_SAVING */
+/* static inline void KEY_POWER_ON(void) { */
+/*     DDRB = 0xFF; PORTB = 0x40;          // change pins output */
+/*     DDRD |= (1<<4); PORTD |= (1<<4);    // MOS FET switch on */
+/*     /1* Without this wait you will miss or get false key events. *1/ */
+/*     _delay_ms(5);                       // wait for powering up */
+/* } */
+/* static inline void KEY_POWER_OFF(void) { */
+/*     /1* input with pull-up consumes less than without it when pin is open. *1/ */
+/*     DDRB = 0x00; PORTB = 0xFF;          // change pins input with pull-up */
+/*     DDRD |= (1<<4); PORTD &= ~(1<<4);   // MOS FET switch off */
+/* } */
+/* static inline bool KEY_POWER_STATE(void) { return PORTD & (1<<4); } */
+/* #else */
 static inline void KEY_POWER_ON(void) {}
 static inline void KEY_POWER_OFF(void) {}
 static inline bool KEY_POWER_STATE(void) { return true; }
-#endif
+/* #endif */
 static inline void KEY_INIT(void)
 {
     /* row,col,prev: output */
-    DDRB  = 0xFF;
-    PORTB = 0x00;   // unable
-    DDRF |= (1<<1);
-    DDRF &= ~(1<<0);
-    PORTF |= (1<<0);
-#ifdef HHKB_JP
-    /* row extention for HHKB JP */
-    DDRC  |= (1<<6|1<<7);
-    PORTC &= ~(1<<6|1<<7);
-#endif
+    DDRD  = 0xFF;
+    PORTD = 0x00;   // unable
+    DDRF |= (1<<4);
+    DDRB &= ~(1<<0);
+    PORTB |= (1<<0);
     KEY_UNABLE();
     KEY_PREV_OFF();
 }
 static inline void KEY_SELECT(uint8_t ROW, uint8_t COL)
 {
-    PORTB = (PORTB & 0xC0) | (((COL) & 0x07)<<3) | ((ROW) & 0x07);
+    PORTD = (PORTD & 0xC0) | (((COL) & 0x07)<<3) | ((ROW) & 0x07);
 #ifdef HHKB_JP
     if ((ROW) & 0x08) PORTC = (PORTC & ~(1<<6|1<<7)) | (1<<6);
     else              PORTC = (PORTC & ~(1<<6|1<<7)) | (1<<7);

@@ -32,38 +32,20 @@ const uint8_t keymaps[][MATRIX_ROWS][MATRIX_COLS] PROGMEM = {
      * ,-----------------------------------------------------------.
      * |Pwr| F1| F2| F3| F4| F5| F6| F7| F8| F9|F10|F11|F12|Ins|Del|
      * |-----------------------------------------------------------|
-     * |Caps |   |   |   |   |   |   |   |Psc|Slk|Pus|Up |   |Backs|
+     * |Caps |   |MSU|   |   |   |   |   |Psc|Slk|Pus|Up |   |Backs|
      * |-----------------------------------------------------------|
-     * |      |VoD|VoU|Mut|||>|   |  *|  /|Hom|PgU|Lef|Rig|Enter   |
+     * |      |MSL|MSD|MSR||  |   |  *|  /|Hom|PgU|Lef|Rig|Enter   |
      * |-----------------------------------------------------------|
-     * |        |   |   |   |   |   |  +|  -|End|PgD|Dow|      |   |
+     * |        |VDn|VUp|VMu|MPl|   |  +|  -|End|PgD|Dow|      |   |
      * `-----------------------------------------------------------'
-     *       |   |     |                       |     |   |
+     *       |  |ClickL|     ClickR            |     |   |
      *       `-------------------------------------------'
      */
     KEYMAP(PWR, F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12, INS, DEL,   \
-           CAPS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,PSCR,SLCK,PAUS, UP, TRNS, BSPC,      \
-           TRNS,VOLD,VOLU,MUTE,MPLY,TRNS,PAST,PSLS,HOME,PGUP,LEFT,RGHT,PENT,         \
-           TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,PPLS,PMNS,END, PGDN,DOWN,TRNS,TRNS,            \
-                TRNS,TRNS,          TRNS,               TRNS,TRNS),
-    /* Layer 2: Mouse Feauture
-     * ,-----------------------------------------------------------.
-     * |Pwr| F1| F2| F3| F4| F5| F6| F7| F8| F9|F10|F11|F12|   |   |
-     * |-----------------------------------------------------------|
-     * |     |   |   |   |   |   |   |   |   |   |   |Up |   |     |
-     * |-----------------------------------------------------------|
-     * |      |  |   |   |   |   |   |   |   |   |Lef|Rig|         |
-     * |-----------------------------------------------------------|
-     * |        |   |   |   |   |   |   |   |   |   |Down|     |   |
-     * `-----------------------------------------------------------'
-     *       |   |     | Click                 |     |   |
-     *       `-------------------------------------------'
-     */
-    KEYMAP(PWR, F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12, TRNS, TRNS, \
-           TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS, MS_U,TRNS,TRNS,      \
-           TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS, MS_L, MS_R,TRNS,          \
-           TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,MS_D,TRNS,TRNS,            \
-                TRNS,TRNS,             BTN1,               TRNS,TRNS),
+           CAPS,TRNS,MS_U,TRNS,TRNS,TRNS,TRNS,TRNS,PSCR,SLCK,PAUS, UP, TRNS, BSPC,      \
+           TRNS,MS_L,MS_D,MS_R,TRNS,TRNS,PAST,PSLS,HOME,PGUP,LEFT,RGHT,PENT,         \
+           TRNS,VOLD,VOLU,MUTE,MPLY,TRNS,PPLS,PMNS,END, PGDN,DOWN,TRNS,TRNS,            \
+                TRNS,BTN2,          BTN1,               TRNS,TRNS),
 };
 
 

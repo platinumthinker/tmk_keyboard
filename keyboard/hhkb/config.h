@@ -22,9 +22,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define VENDOR_ID       0xFEED
 #define PRODUCT_ID      0xCAFE
 #define DEVICE_VER      0x0104
-#define MANUFACTURER    t.m.k.
+#define MANUFACTURER    thinker
 #define PRODUCT         HHKB mod
-#define DESCRIPTION     t.m.k. keyboard firmware for HHKB mod
+#define DESCRIPTION     thinker keyboard firmware for HHKB mod
 
 
 /* matrix size */
@@ -37,11 +37,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /* key combination for command */
-#define IS_COMMAND() (keyboard_report->mods == (MOD_BIT(KC_LSHIFT) | MOD_BIT(KC_RSHIFT))) 
+#define IS_COMMAND() (keyboard_report->mods == (MOD_BIT(KC_LSHIFT) | MOD_BIT(KC_RSHIFT)))
 
 
 /* period of tapping(ms) */
-#define TAPPING_TERM    300
+#define TAPPING_TERM    200
 /* tap count needed for toggling a feature */
 #define TAPPING_TOGGLE  5
 /* Oneshot timeout(ms) */
