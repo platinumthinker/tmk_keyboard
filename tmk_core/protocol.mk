@@ -26,6 +26,13 @@ ifdef PS2_USE_USART
 endif
 
 
+ifdef XT_USE_INT
+    SRC += protocol/xt_interrupt.c
+    SRC += protocol/xt_io_avr.c
+    OPT_DEFS += -DXT_USE_INT
+endif
+
+
 ifdef SERIAL_MOUSE_MICROSOFT_ENABLE
     SRC += $(PROTOCOL_DIR)/serial_mouse_microsoft.c
     OPT_DEFS += -DSERIAL_MOUSE_ENABLE -DSERIAL_MOUSE_MICROSOFT \
@@ -44,6 +51,10 @@ endif
 
 ifdef SERIAL_MOUSE_USE_UART
     SRC += $(PROTOCOL_DIR)/serial_uart.c
+endif
+
+ifdef ADB_MOUSE_ENABLE
+	 OPT_DEFS += -DADB_MOUSE_ENABLE -DMOUSE_ENABLE
 endif
 
 # Search Path

@@ -1,11 +1,7 @@
 LUFA_DIR = protocol/lufa
 
 # Path to the LUFA library
-ifeq (, $(wildcard $(TMK_DIR)/$(LUFA_DIR)/LUFA-git/LUFA/Version.h))
-    LUFA_PATH ?= $(LUFA_DIR)/LUFA-120730
-else
-    LUFA_PATH ?= $(LUFA_DIR)/LUFA-git
-endif
+LUFA_PATH ?= $(LUFA_DIR)/LUFA-git
 
 
 # Create the LUFA source path variables by including the LUFA makefile
@@ -41,6 +37,10 @@ LUFA_OPTS += -DUSE_STATIC_OPTIONS="(USB_DEVICE_OPT_FULLSPEED | USB_OPT_REG_ENABL
 #LUFA_OPTS += -DINTERRUPT_CONTROL_ENDPOINT
 LUFA_OPTS += -DFIXED_CONTROL_ENDPOINT_SIZE=8 
 LUFA_OPTS += -DFIXED_NUM_CONFIGURATIONS=1
+# Remote wakeup fix for ATmega32U2        https://github.com/tmk/tmk_keyboard/issues/361
+ifeq ($(MCU),atmega32u2)
+	LUFA_OPTS += -DNO_LIMITED_CONTROLLER_CONNECT
+endif
 
 OPT_DEFS += -DF_USB=$(F_USB)UL
 OPT_DEFS += -DARCH=ARCH_$(ARCH)
